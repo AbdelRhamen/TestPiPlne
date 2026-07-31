@@ -1,0 +1,16 @@
+services:
+  order-api:
+    build:
+      context: .
+      dockerfile: Dockerfile  # تأكد من أن الاسم مطابق تماماً لاسم الملف
+    container_name: order-api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=192.168.56.1\SQLEXPRESS;Initial Catalog=OrderDb22;User Id=sa;Password=123456;MultipleActiveResultSets=True;TrustServerCertificate=True;
+      - GrpcSettings__ProductUrl=http://product-api:7779
+      - GrpcSettings__UserUrl=http://user-management-api:7165
+      - ASPNETCORE_KESTREL__ENDPOINTS__HTTP__URL=http://+:5281
+      - ASPNETCORE_KESTREL__ENDPOINTS__HTTP__PROTOCOLS=Http1
+    ports:
+      - "5281:6001"   # HTTP (Swagger)
+      - "5282:6002"

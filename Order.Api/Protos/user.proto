@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+option csharp_namespace = "UserManagement.Apo";
+
+package user;
+
+service UserGrpc {
+  rpc GetUser (UserRequest) returns (UserResponse);
+}
+
+message UserRequest {
+  string userId = 1;
+}
+
+message UserResponse {
+  string userId = 1;
+  string fullName = 2;
+  string email = 3;
+  bool exists = 4;
+}

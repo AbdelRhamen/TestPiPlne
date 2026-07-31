@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+option csharp_namespace = "Order.Api.Protos";
+
+package inventory;
+
+service InventoryService {
+  rpc CheckStock (StockRequest) returns (StockResponse);
+  rpc GetProductDetails (ProductRequest) returns (ProductResponse);
+}
+
+message StockRequest {
+  string productId = 1;
+  int32 quantity = 2;
+}
+
+message StockResponse {
+  bool isAvailable = 1;
+  string message = 2;
+}
+message ProductRequest {
+  string productId = 1;
+}
+message ProductResponse {
+  string productId = 1;
+  string name = 2;
+  double price = 4;
+}
+

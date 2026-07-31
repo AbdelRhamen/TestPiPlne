@@ -1,0 +1,14 @@
+<Solution>
+  <Folder Name="/Api/">
+    <Project Path="Order.Api/Order.Api.csproj" />
+  </Folder>
+  <Folder Name="/Application/">
+    <Project Path="Application/Application.csproj" Id="b16e3d7a-ac3b-4ee9-a0cc-3b7232dd796f" />
+  </Folder>
+  <Folder Name="/Data/">
+    <Project Path="Data/Data.csproj" Id="1b156ddc-dad3-45f1-9260-bb16f837b262" />
+  </Folder>
+  <Folder Name="/Domain/">
+    <Project Path="Domain/Domain.csproj" Id="fe31affd-9950-4014-bcbb-3dc33a852c1e" />
+  </Folder>
+</Solution>

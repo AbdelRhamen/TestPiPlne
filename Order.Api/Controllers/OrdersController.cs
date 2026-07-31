@@ -9,15 +9,12 @@ namespace Order.Api.Controllers
     [Route("api/[controller]")]
     [ApiController]
     //[Authorize]
-
-
-
+  
     public class OrdersController : ControllerBase
     {
         private readonly IOrderServices _orderServices;
         private readonly ProductClientService _productClient;
         private readonly UserClientService _userClient;
-
         public OrdersController(IOrderServices orderServices, ProductClientService productClient, UserClientService userClient)
         {
             _orderServices = orderServices;

@@ -54,13 +54,6 @@ namespace Order.Api.Controllers
             foreach (var o in orders)
             {
 
-
-
-
-
-
-
-
                 var user = await _userClient.GetUserDetailsAsync(o.CreatedBy);
                 var product = await _productClient.GetProductDetailsAsync(o.ProductId);
                 ordersWithUser.Add(new

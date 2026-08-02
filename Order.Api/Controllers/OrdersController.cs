@@ -53,6 +53,10 @@ namespace Order.Api.Controllers
 
             foreach (var o in orders)
             {
+
+
+
+
                
 
                 var user = await _userClient.GetUserDetailsAsync(o.CreatedBy);

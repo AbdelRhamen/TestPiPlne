@@ -1,41 +1,45 @@
-name: Run Project Check
+name: Order Service CI/CD
 
 on:
+  push:
+    branches: [  Dev ]
+    paths:
+      - 'Order.Api/**'
+      - 'Application/**'
+      - 'Data/**'
+      - 'Domain/**'
+      - '*.sln'
   pull_request:
-    branches:
-      - Dev
+    branches: [ Dev ]
+    paths:
+      - 'Order.Api/**'
+      - 'Application/**'
+      - 'Data/**'
+      - 'Domain/**'
+      - '*.sln'
+
+env:
+  DOTNET_VERSION: '8.0.x'
+  SOLUTION_PATH: 'Order.sln'  # Adjust to your solution name
+  PROJECT_PATH: 'Order.Api/Order.Api.csproj'
 jobs:
-  run-project:
-    name: Run & Verify Project
+  build-and-test:
+    name: Build & Test
     runs-on: ubuntu-latest
     
     steps:
-      - name: 📥 Checkout Code
-        uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v4
 
-      - name: 🗄️ Setup .NET 8
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: '8.0.x'
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: ${{ env.DOTNET_VERSION }}
 
-      - name: 📦 Restore Dependencies
-        run: dotnet restore Order.Api/Order.Api.csproj
+    - name: Restore dependencies
+      run: dotnet restore ${{ env.SOLUTION_PATH }}
 
-      - name: 🔨 Build Solution
-        run: dotnet build Order.Api/Order.Api.csproj --configuration Release
+    - name: Build
+      run: dotnet build ${{ env.SOLUTION_PATH }} --configuration Release --no-restore
 
-      - name: 🚀 Run Project (Verify Starts Correctly)
-        run: |
-          dotnet run --project Order.Api/Order.Api.csproj &
-          APP_PID=$!
-          
-          echo "Waiting for application to start..."
-          sleep 15
-          
-          if kill -0 $APP_PID 2>/dev/null; then
-            echo "✅ Project is running correctly!"
-            kill $APP_PID
-          else
-            echo "❌ Project failed to start!"
-            exit 1
-          fi
+
